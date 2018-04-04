@@ -23,5 +23,7 @@ Route::group(['prefix' => Auth::routes()], function(){
 	Route::get('detail-hotel/{id}', 'Hotel\HotelController@getDetailHotel')->name('hotel.detail');
 	Route::post('/hotel-create', 'Hotel\HotelController@createHotel')->name('hotel.create');
 	Route::get('detail-room/{id}', 'Hotel\HotelController@getDetailRoom')->name('hotel.room.detail');
-});
+	Route::resource('todo', 'TodoController');
 
+
+});

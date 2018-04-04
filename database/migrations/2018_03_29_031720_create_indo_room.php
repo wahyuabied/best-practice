@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Artikel extends Migration
+class CreateIndoRoom extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class Artikel extends Migration
      */
     public function up()
     {
-          Schema::create('artikels', function (Blueprint $table) {
+        Schema::create('indo_rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title')->unique();
-            $table->string('content');
-            $table->integer('user_id');
+            $table->integer('hotel_id');
+            $table->string('name');
+            $table->string('code');
+            $table->double('basic_price');
+            $table->text('descriptions');
+            $table->boolean('available');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class Artikel extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('artikels');
+        Schema::drop('indo_rooms');
     }
 }
