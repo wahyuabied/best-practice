@@ -13,7 +13,7 @@ class CreateIndoHotels extends Migration
      */
     public function up()
     {
-        Schema::create('indo_hotels', function (Blueprint $table) {
+        Schema::create('hotels', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('code');
@@ -36,6 +36,6 @@ class CreateIndoHotels extends Migration
      */
     public function down()
     {
-        Schema::drop('indo_hotels');
+        Schema::drop('hotels');
     }
 }

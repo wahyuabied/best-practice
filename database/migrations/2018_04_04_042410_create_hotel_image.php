@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIndoRoom extends Migration
+class CreateHotelImage extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateIndoRoom extends Migration
      */
     public function up()
     {
-        Schema::create('rooms', function (Blueprint $table) {
+        Schema::create('hotel_images', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('hotel_id');
-            $table->string('name');
-            $table->string('code');
-            $table->double('basic_price');
-            $table->text('descriptions');
-            $table->boolean('available');
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateIndoRoom extends Migration
      */
     public function down()
     {
-        Schema::drop('rooms');
+        Schema::drop('hotel_images');
     }
 }

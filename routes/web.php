@@ -17,13 +17,15 @@ Route::get('/', function () {
 
 Route::group(['prefix' => Auth::routes()], function(){
 	Route::get('/home', 'Dashboard\HomeController@index')->name('home');
-	Route::get('/artikel', 'Artikel\ArtikelController@index')->name('artikel.index');
-	Route::post('/artikel-create', 'Artikel\ArtikelController@createArtikel')->name('artikel.create');
-	Route::get('/hotel', 'Hotel\HotelController@index')->name('hotel.index');
-	Route::get('detail-hotel/{id}', 'Hotel\HotelController@getDetailHotel')->name('hotel.detail');
-	Route::post('/hotel-create', 'Hotel\HotelController@createHotel')->name('hotel.create');
-	Route::get('detail-room/{id}', 'Hotel\HotelController@getDetailRoom')->name('hotel.room.detail');
-	Route::resource('todo', 'TodoController');
-
-
 });
+
+Route::get('/hotel','Hotel\HotelController@index')->name('hotel.index');
+Route::get('/hotel-search/{p}','Hotel\HotelController@searchHotel')->name('hotel.search');
+Route::get('/hotel-detail/{p}','Hotel\HotelController@getDetail')->name('hotel.detail');
+Route::post('/hotel-create','Hotel\HotelController@createHotel')->name('hotel.create');
+Route::post('/hotel-update','Hotel\HotelController@updateHotel')->name('hotel.update');
+Route::post('/hotel-delete/{id}','Hotel\HotelController@deleteHotel')->name('hotel.delete');
+//room
+Route::post('/room-create','Room\RoomController@createRoom')->name('room.create');
+Route::post('/room-update','Room\RoomController@updateRoom')->name('room.update');
+Route::post('/room-delete/{$id}','Room\RoomController@deleteRoom')->name('room.delete');
