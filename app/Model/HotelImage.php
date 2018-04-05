@@ -13,8 +13,4 @@ class HotelImage extends Model
     public function imageHotel(){
         return $this->belongsTo('\App\Model\Hotel','id','hotel_id');
     }
-
-    public static function create(Request $request){
-    	
-    }
 }
