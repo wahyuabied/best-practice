@@ -11,15 +11,20 @@ class HotelController extends Controller
 {
     public function index(){
     	$data = Hotel::allHotel();
-    	// return view(/*hotel.index*/,['data'=> $data]);
+    	return response()->json([
+            'status' => 'ok',
+            'data'=>$data
+        ], 200);
     }
 
      public function searchHotel($p){
     	$hotel = Hotel::getHotel($p);
-        $image = Hotel::getImage($data[0]->id);
-        
-        return $image;
-    	// return view(/*hotel.index*/,['data'=> $data]);
+        $image = Hotel::getImage($data);
+
+        return response()->json([
+            'status' => 'ok',
+            'data'=>$data
+        ], 200);
     }
 
     public function getDetail($id){
@@ -29,29 +34,47 @@ class HotelController extends Controller
             'hotel'=>$hotel,
             'room'=>$room
         ];
-        return $data;
-    	// return view(/*hotel.index*/,['data'=> $data]);
+        return response()->json([
+            'status' => 'ok',
+            'data'=>$data
+        ], 200);
     }
 
     public function createHotel(Request $request){
-        Hotel::create($request->all());
-        $this->createImageHotel($request);
-    	// return back();
+        $hotel=Hotel::create($request->all());
+        $image=$this->createImageHotel($request);
+        if((!$hotel->save())&&(!$image->save())) {
+            throw new HttpException(500);
+        }
+            return response()->json([
+                'status' => 'ok',
+                'data'=>$data
+            ], 200);    
+        
+    	
     }
 
     public function updateHotel(Request $request){
     	$hotel = Hotel::getHotelFromId($request->id);
     	$hotel->update($request->all());
-    	// return back();
+        return response()->json([
+            'status' => 'ok',
+        ], 200);
     }
 
     public function deleteHotel($id){
     	Hotel::getHotelFromId($id)->delete();
-    	// return back();
+    	return response()->json([
+            'status' => 'ok',
+        ], 200);
     }
 
     public function createImageHotel(Request $request){
         $request->request->add('hotel_id',$request->id);
-        HotelImage::create($request->all());
+        $image = HotelImage::create($request->all());
+        return response()->json([
+            'status' => 'ok',
+            'data'=>$image
+        ], 200);
     }
 }
